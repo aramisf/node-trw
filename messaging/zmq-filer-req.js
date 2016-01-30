@@ -12,9 +12,12 @@ requester.on("message", function(data) {
 
 requester.connect("tcp://localhost:5433");
 
-// send request for content
-console.log('Sending request for ' + filename);
+for (var i = 0; i < 5; i++) {
 
-requester.send(JSON.stringify({
-  path: filename
-}));
+  // send request for content
+  console.log('Sending request ' + i + ' for ' + filename);
+
+  requester.send(JSON.stringify({
+    path: filename
+  }));
+}
