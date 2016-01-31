@@ -13,12 +13,23 @@ responder.on('message', function(data) {
 
   // read file and reply with content
   fs.readFile(request.path, function(err, content) {
-    console.log('Sending response content');
-    responder.send(JSON.stringify({
-      content: content.toString(),
-      timestamp: Date.now(),
-      pid: process.pid
-    }));
+    if (err) {
+      console.log('ERROR! ' + err);
+      responder.send (JSON.stringify({
+        error: err.toString(),
+        timestamp: Date.now(),
+        pid: process.pid
+      }));
+    }
+
+    else {
+      console.log('Sending response content');
+      responder.send(JSON.stringify({
+        content: content.toString(),
+        timestamp: Date.now(),
+        pid: process.pid
+      }));
+    }
   });
 
 });
@@ -31,5 +42,10 @@ responder.bind('tcp://127.0.0.1:5433', function(err) {
 // close the responder when the Node process ends
 process.on('SIGINT', function() {
   console.log('Shutting down...');
+  responder.close();
+});
+
+process.on('uncaughtException', function(msg){
+  console.log("uncaughtException: " + msg);
   responder.close();
 });
