@@ -2,7 +2,12 @@
 const
   cluster = require('cluster'),
   fs = require('fs'),
-  zmq = require('zmq');
+  zmq = require('zmq'),
+  respawn = function (code, signal) {
+      console.log("Worker " + this.process.pid + " killed by signal " + signal +" with code "+ code);
+      console.log("Respawning ...");
+      cluster.fork().on('exit', respawn);
+    };
 
 if (cluster.isMaster) {
 
@@ -29,7 +34,7 @@ if (cluster.isMaster) {
 
   // fork three worker processes
   for (let i = 0; i < 3; i++) {
-    cluster.fork();
+    cluster.fork().on('exit', respawn);
   }
 
 } else {
