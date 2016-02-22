@@ -1,8 +1,7 @@
-var buffer = '';
-var lines = [];
 
 function splitter (data) {
-  buffer += data;
+  var buffer = data;
+  var lines = [];
   var boundary = buffer.indexOf('\n');
 
   while (boundary !== -1) {

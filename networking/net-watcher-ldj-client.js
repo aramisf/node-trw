@@ -1,8 +1,8 @@
 "use strict";
-const
+var
 net = require('net'),
-//ldj = require('./ldj.js'),
-ldj = require('./robust_ldj.js'),
+ldj = require('./ldj2.js'),
+// ldj = require('./robust_ldj.js'),
 netClient = net.connect({ port: 5432 }),
 ldjClient = ldj.connect(netClient);
 

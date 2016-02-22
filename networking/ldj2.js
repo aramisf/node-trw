@@ -1,4 +1,4 @@
-const
+var
   events    = require('events'),
   util      = require('util'),
   splitter  = require('./ldj-splitter').splitter,
@@ -7,7 +7,9 @@ const
   LDJClient = function(stream) {
     // Initialize necessary properties from `EventEmitter` in this instance
     events.EventEmitter.call(this);
-    stream.on('data', parser(this, splitter(data)));
+    stream.on('data', function (data) {
+      parser(splitter(data));
+    });
   };
 
 // Inherit functions from `EventEmitter`'s prototype
