@@ -13,9 +13,9 @@ const
                                         // Socket object, that will be built
                                         // on line 27 of this file
     });
-      // check the following to see the difference:
-      console.log("THIS: '"+this.constructor.name+"'");
-      console.log("SELF: '"+self.constructor.name+"'");
+    // check the following to see the difference:
+    // console.log("THIS: '"+this.constructor.name+"'");
+    // console.log("SELF: '"+self.constructor.name+"'");
   };
 
 // Inherit functions from `EventEmitter`'s prototype
