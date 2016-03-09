@@ -1,10 +1,8 @@
-
-function splitter (data) {
-  var buffer = data;
+module.exports = function (data) {
+  var buffer = data.toString();
   var lines = [];
   var boundary = buffer.indexOf('\n');
-
-  while (boundary !== -1) {
+  while (boundary != -1) {
     lines.push(buffer.substr(0, boundary));
     buffer = buffer.substr(boundary + 1);
     boundary = buffer.indexOf('\n');

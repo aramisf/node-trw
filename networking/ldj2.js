@@ -1,15 +1,21 @@
-var
+const
   events    = require('events'),
   util      = require('util'),
-  splitter  = require('./ldj-splitter').splitter,
-  parser    = require('./ldj-parser').parser,
+  splitter  = require('./ldj-splitter'),
+  parser    = require('./ldj-parser'),
   // client constructor
   LDJClient = function(stream) {
     // Initialize necessary properties from `EventEmitter` in this instance
     events.EventEmitter.call(this);
+    var self = this; // save LDJClient object
     stream.on('data', function (data) {
-      parser(splitter(data));
+      parser(self,splitter(data),this); // because 'this' here refers to the
+                                        // Socket object, that will be built
+                                        // on line 27 of this file
     });
+      // check the following to see the difference:
+      console.log("THIS: '"+this.constructor.name+"'");
+      console.log("SELF: '"+self.constructor.name+"'");
   };
 
 // Inherit functions from `EventEmitter`'s prototype
