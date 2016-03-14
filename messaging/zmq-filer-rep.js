@@ -45,6 +45,11 @@ process.on('SIGINT', function() {
   responder.close();
 });
 
+process.on('SIGTERM', function() {
+  console.log('Received a SIGTERM, shutting down...\\o');
+  responder.close();
+});
+
 process.on('uncaughtException', function(msg){
   console.log("uncaughtException: " + msg);
   responder.close();
