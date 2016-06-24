@@ -4,6 +4,7 @@
   "description": "Tools for creating an ebook database.",
   "author": "Your Name <you@yoursite.com> (http://yoursite.com/path)",
   "dependencies": {
+    "cheerio": "^0.12.4",
     "request": "^2.72.0"
   }
 }
