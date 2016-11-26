@@ -9,7 +9,7 @@ node:
   links:
     - db
   volumes:
-    - ".:/trw"
+    - ".:/trw-databases"
 
 db:
   image: couchdb:latest
