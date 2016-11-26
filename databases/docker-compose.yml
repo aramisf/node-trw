@@ -1,0 +1,25 @@
+node:
+  build: .
+  container_name: nodejs_the_right_way
+  command: bash -c 'while [ true ]; do sleep 10; done'
+  ports:
+    - "3000:3000"
+  expose:
+    - "3000"
+  links:
+    - db
+  volumes:
+    - ".:/trw"
+
+db:
+  image: couchdb:latest
+  container_name: couchdb
+  volumes:
+    - "./couch_data:/couch_data"
+  ports:
+    - "5984:5984"
+  expose:
+    - "5984"
+  environment:
+    - COUCHDB_USER=admin
+    - COUCHDB_PASSWORD=password
