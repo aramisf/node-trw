@@ -24,4 +24,5 @@ module.exports = function(filename, callback) {
       });
   });
 };
-
+// Test it on a one-liner
+// node -e 'require("./lib/rdf-parser.js")("RDFs/cache/epub/132/pg132.rdf", console.log)'
