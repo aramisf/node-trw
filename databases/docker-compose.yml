@@ -9,7 +9,9 @@ node:
   links:
     - db
   volumes:
-    - ".:/trw-databases"
+    - ".:/trw_databases"
+  environment:
+    - TERM=xterm
 
 db:
   image: couchdb:latest
@@ -20,6 +22,6 @@ db:
     - "5984:5984"
   expose:
     - "5984"
-  environment:
-    - COUCHDB_USER=admin
-    - COUCHDB_PASSWORD=password
+  # environment:
+  #   - COUCHDB_USER=admin
+  #   - COUCHDB_PASSWORD=password

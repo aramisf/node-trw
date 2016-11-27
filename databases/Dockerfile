@@ -1,6 +1,6 @@
 FROM node:7.2.0-wheezy
 
-ENV APP_HOME /trw
+ENV APP_HOME /trw_databases
 
 COPY . $APP_HOME
 

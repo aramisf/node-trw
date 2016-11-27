@@ -1,28 +1,29 @@
+#!/usr/bin/env node
 'use strict';
 
 const
-  fs = require('fs'),
-  cheerio = require('cheerio');
+    fs = require('fs'),
+    cheerio = require('cheerio');
 
 module.exports = function(filename, callback) {
 
-  fs.readFile(filename, function(err, data){
+    fs.readFile(filename, function(err, data){
 
-    if (err) { return callback(err); }
+        if (err) { return callback(err); }
 
-    let
-      $ = cheerio.load(data.toString()),
-      collect = function(index, elem) {
-        return $(elem).text();
-      };
+        let
+            $ = cheerio.load(data.toString()),
+            collect = function(index, elem) {
+                return $(elem).text();
+            };
 
-      callback(null, {
-        _id: $('pgterms\\:ebook').attr('rdf:about').replace('ebooks/', ''),
-        title: $('dcterms\\:title').text(),
-        authors: $('pgterms\\:agent pgterms\\:name').map(collect),
-        subjects: $('[rdf\\:resource$="/LCSH"] ~ rdf\\:value').map(collect)
-      });
-  });
+            callback(null, {
+                _id: $('pgterms\\:ebook').attr('rdf:about').replace('ebooks/', ''),
+                title: $('dcterms\\:title').text(),
+                authors: $('pgterms\\:agent pgterms\\:name').map(collect),
+                subjects: $('[rdf\\:resource$="/LCSH"] ~ rdf\\:value').map(collect)
+            });
+    });
 };
 // Test it on a one-liner
 // node -e 'require("./lib/rdf-parser.js")("RDFs/cache/epub/132/pg132.rdf", console.log)'
